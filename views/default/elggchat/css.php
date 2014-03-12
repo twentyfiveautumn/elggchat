@@ -239,7 +239,6 @@
 }
 
 .elggchatinput{
-//	background: #FFFFFF url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/chatwindow/chat_input.png") no-repeat 1px 50%;
 	padding-left:18px;
 	border-top: 1px solid #DEDEDE;
 	border-bottom: 1px solid #DEDEDE;
