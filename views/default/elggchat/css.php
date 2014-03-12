@@ -48,6 +48,7 @@
 }
 
 .session {
+	width:260px;
 	float: left;
 	background: #E4ECF5;
 	border: 1px solid #4690D6;
@@ -146,7 +147,7 @@
 }
 
 .chatsessiondatacontainer {
-	width:200px;
+	// width:260px;
 	display: none;
 }
 
@@ -165,6 +166,7 @@
 	width:206px;
 	max-height:600px;
 	overflow:hidden;
+	wordWrap: break-word;
 }
 
 .chatmembers{
@@ -237,11 +239,13 @@
 }
 
 .elggchatinput{
-	background: #FFFFFF url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/chatwindow/chat_input.png") no-repeat 1px 50%;
+//	background: #FFFFFF url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/chatwindow/chat_input.png") no-repeat 1px 50%;
 	padding-left:18px;
 	border-top: 1px solid #DEDEDE;
 	border-bottom: 1px solid #DEDEDE;
 	height:22px;
+	overflow:hidden;
+	wordWrap: break-word;
 }
 
 .elggchatinput input{
@@ -252,5 +256,5 @@
 
 .elggchatinput input:focus{
 	border: none;
-	background:none;
+//	background:none;
 }
