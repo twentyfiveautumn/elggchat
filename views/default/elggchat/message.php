@@ -3,10 +3,9 @@
 	$message = $vars['message'];
 	$offset = $vars['offset'];
 	$user = $vars['message_owner'];
+	$smiley_url = $vars['url'] . "ajax/view/elggchat/get_smiley?_" . time() . "&smiley=";
 	
-	$smiley_url = $vars['url'] . "action/elggchat/get_smiley?_" . time() . "&smiley=";
-	
-	$randomint = time();
+	$randomint = time();	//	@todo is this used anywhere?
 	$smileys = array(
 		":(|)" => "<img src='" . $smiley_url . "animated_smileys/monkey.gif'>",
 		"=D" => "<img src='" . $smiley_url . "animated_smileys/smile.gif'>",
@@ -29,16 +28,16 @@
 		
 		);
 	
-	if($message->access_id != ACCESS_PRIVATE || $user->guid == get_loggedin_userid()){
+	if($message->access_id != ACCESS_PRIVATE || $user->guid == elgg_get_logged_in_user_guid()){
 		$result = "";
 		if($message->name == ELGGCHAT_MESSAGE){
 			$result .= "<div name='message' id='" .  $offset . "' class='messageWrapper'>";
 			
-			$result .= "<table ><tr><td rowspan='2'>";
-			$result .= "<a href='" . $user->getURL() . "'><img class='messageIcon' alt='" . $user->name . "' src='". $user->getIcon('tiny') . "'></a>";
+			$result .= "<table ><tr><td>";
+			$result .= "<a href='" . $user->getURL() . "'><img class='messageIcon' alt='" . $user->name . "' src='". $user->getIconURL('tiny') . "'></a>";
 			$result .= "</td><td class='messageName'>" . $user->name . "</td></tr>";
 			
-			$result .= "<tr><td>";
+			$result .= '<tr class="messageBody"><td colspan="2">';
 
 			$result .= str_ireplace(array_keys($smileys), array_values($smileys), $message->value);
 			$result .= "</td></tr></table>";

@@ -18,34 +18,39 @@
 	define("ELGGCHAT_MESSAGE", "elggchat_message");	
 	
 	function elggchat_init() {
-		if(isloggedin()){
-			if(get_plugin_usersetting("enableChat") != "no"){
+	
+		//sound js 
+		$chatsound_js = 'mod/elggchat/js/sound/jquery.sound.js';
+		elgg_register_js('chatsound_js', $chatsound_js, 'footer' );
+		elgg_load_js('chatsound_js');
+		
+		if(elgg_is_logged_in()){
+			if(elgg_get_plugin_user_setting("enableChat") != "no"){
 				
-				extend_view('profile/menu/actions', 'elggchat/profile_menu_actions');
-				extend_view('page_elements/header', 'elggchat/session_monitor');
-				
-				extend_view('metatags','elggchat/metatags');
-				
+				elgg_extend_view('page/elements/header', 'elggchat/session_monitor');
+			
+				elgg_extend_view('css/elgg', 'elggchat/css');
+				elgg_extend_view('js/elgg', 'elggchat/js');
+								
 				// elggchat_extensions
-				//extend_view('elggchat/extensions', 'elggchat_extensions/latest_river');
-				
+				//elgg_extend_view('elggchat/extensions', 'elggchat_extensions/latest_river');
 			}
 		}
     }
 	
 	// Cron Actions
 	function elggchat_session_cleanup($hook, $entity_type, $returnvalue, $params){
-		$context = get_context();
-		set_context("elggchat_cron_context");
+		$context = elgg_get_context();
+		elgg_set_context("elggchat_cron_context");
 		
-		$session_count = get_entities("object", ELGGCHAT_SESSION_SUBTYPE, 0, "", 0, 0, true);
-		$sessions = get_entities("object", ELGGCHAT_SESSION_SUBTYPE, 0, "", $session_count);
+		$session_count = elgg_get_entities("object", ELGGCHAT_SESSION_SUBTYPE, 0, "", 0, 0, true);
+		$sessions = elgg_get_entities("object", ELGGCHAT_SESSION_SUBTYPE, 0, "", $session_count);
 		
 		foreach($sessions as $session){
 			$member_count = $session->countEntitiesFromRelationship(ELGGCHAT_MEMBER);
 			
 			if($member_count > 0){
-				$max_age = (int) get_plugin_setting("maxSessionAge");
+				$max_age = (int) elgg_get_plugin_setting("maxSessionAge");
 				$age = time() - $session->time_updated;
 				
 				if($age > $max_age){
@@ -55,13 +60,13 @@
 				$session->delete();
 			}
 		}
-		set_context($context);
+		elgg_set_context($context);
 	}
 	
 	function elggchat_permissions_check($hook_name, $entity_type, $return_value, $parameters) {
 		$result = $return_value;
 		
-		if(get_context() == "elggchat_cron_context"){
+		if(elgg_get_context() == "elggchat_cron_context"){
 			$result = true;
 		}
 		
@@ -69,18 +74,25 @@
 	}
 	
 	function elggchat_logout_handler($event, $object_type, $object){
-		
+	
 		if(!empty($object) && $object instanceof ElggUser){
-			$chat_sessions_count = get_entities_from_relationship(ELGGCHAT_MEMBER, $object->guid, true, "", "", "", "time_created desc", null, null, true);
-			
+	
+		$chat_sessions = elgg_get_entities_from_relationship(array(
+		'relationship' => 'elggchat_member',
+		'relationship_guid' => $user->guid,
+		'inverse_relationship' => TRUE,
+		'types' => 'object',
+		'subtypes' => ELGGCHAT_SESSION_SUBTYPE,
+		'limit' => $limit,
+		'offset' => $offset
+		));
+		$chat_sessions_count = count($chat_sessions);
+	
 			if($chat_sessions_count > 0){
-				$sessions = $object->getEntitiesFromRelationship(ELGGCHAT_MEMBER, true);
-				
-				foreach($sessions as $session){
+			
+				foreach($chat_sessions as $session){
 					remove_entity_relationship($session->guid, ELGGCHAT_MEMBER, $object->guid);
-					
-					$session->annotate(ELGGCHAT_SYSTEM_MESSAGE, sprintf(elgg_echo('elggchat:action:leave'), $object->name), ACCESS_LOGGED_IN, $object->guid);
-					
+					$session->annotate(ELGGCHAT_SYSTEM_MESSAGE, sprintf(elgg_echo('elggchat:action:leave'), $object->name), ACCESS_LOGGED_IN, $object->guid);	//	@todo this does not work...
 					// Clean up
 					if($session->countEntitiesFromRelationship(ELGGCHAT_MEMBER) == 0){
 						// No more members
@@ -89,30 +101,62 @@
 						// Owner left without leaving a real message
 						$session->delete();
 					}
-				}
+				}	//	end	foreach($sessions as $session)
 				
-			}
-		}
+			}	//	end if($chat_sessions_count > 0)
+		}	//	end if(!empty($object) && $object instanceof ElggUser)
 		
 		return true;
-	}
-
-	register_elgg_event_handler('init', 'system', 'elggchat_init');
+	}	//	end function elggchat_logout_handler
+	
+	elgg_register_event_handler('init', 'system', 'elggchat_init');
 	
 	// Permission check overrule
-	register_plugin_hook('permissions_check', 'all', 'elggchat_permissions_check');
+	elgg_register_plugin_hook_handler('permissions_check', 'all', 'elggchat_permissions_check');
 	
 	// Register Cron Jobs
-	register_plugin_hook('cron', 'hourly', 'elggchat_session_cleanup');
+	elgg_register_plugin_hook_handler('cron', 'hourly', 'elggchat_session_cleanup');
+	
+	// Extend avatar hover menu
+	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'elggchat_user_hover_menu');
 	
 	// actions
-	register_action("elggchat/create", false, $CONFIG->pluginspath . "elggchat/actions/create.php");
-	register_action("elggchat/post_message", false, $CONFIG->pluginspath . "elggchat/actions/post_message.php");
-	register_action("elggchat/poll", false, $CONFIG->pluginspath . "elggchat/actions/poll.php");
-	register_action("elggchat/invite", false, $CONFIG->pluginspath . "elggchat/actions/invite.php");
-	register_action("elggchat/leave", false, $CONFIG->pluginspath . "elggchat/actions/leave.php");
-	register_action("elggchat/get_smiley", false, $CONFIG->pluginspath . "elggchat/actions/get_smiley.php");
+//	elgg_register_action("elggchat/create", false, $CONFIG->pluginspath . "elggchat/actions/create.php");
+//	elgg_register_action("elggchat/post_message", false, $CONFIG->pluginspath . "elggchat/actions/post_message.php");
+//	elgg_register_action("elggchat/poll", false, $CONFIG->pluginspath . "elggchat/actions/poll.php");
+//	elgg_register_action("elggchat/invite", false, $CONFIG->pluginspath . "elggchat/actions/invite.php");
+//	elgg_register_action("elggchat/leave", false, $CONFIG->pluginspath . "elggchat/actions/leave.php");
+//	elgg_register_action("elggchat/get_smiley", false, $CONFIG->pluginspath . "elggchat/actions/get_smiley.php");
 	
 	// Logout event handler
-	register_elgg_event_handler('logout', 'user', 'elggchat_logout_handler');
-?>
+	elgg_register_event_handler('logout', 'user', 'elggchat_logout_handler');
+	
+	elgg_register_page_handler('elggchat', 'elggchat_page_handler');
+	
+	function elggchat_page_handler() {
+		echo elgg_view('elggchat/index');
+	}
+	
+	// ajax views
+	elgg_register_ajax_view('elggchat/create');
+	elgg_register_ajax_view('elggchat/post_message');
+	elgg_register_ajax_view('elggchat/poll');
+	elgg_register_ajax_view('elggchat/invite');
+	elgg_register_ajax_view('elggchat/leave');
+	elgg_register_ajax_view('elggchat/get_smiley');
+	
+/*****	Add to the user hover menu	*****/
+
+function elggchat_user_hover_menu($hook, $type, $return, $params) {
+	$user = $params['entity'];
+
+	if (elgg_is_logged_in() && elgg_get_logged_in_user_guid() != $user->guid) {
+		$url = "javascript:startSession(".$user->guid.")";
+	//	$url = "messages/compose?send_to={$user->guid}";
+		$item = new ElggMenuItem('invite', elgg_echo('elggchat:chat:profile:invite'), $url);
+		$item->setSection('action');
+		$return[] = $item;
+	}
+
+	return $return;
+}

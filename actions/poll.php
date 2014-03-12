@@ -11,8 +11,8 @@
 	* @version 0.4
 	*/
 
-if($user = get_loggedin_user()){
-	$chat_sessions_count = get_entities_from_relationship(ELGGCHAT_MEMBER, $user->getGUID(), true, "", "", "", "time_created desc", null, null, true);
+if($user = elgg_get_logged_in_user_entity()){
+	$chat_sessions_count = elgg_get_entities_from_relationship(ELGGCHAT_MEMBER, $user->getGUID(), true, "", "", "", "time_created desc", null, null, true);
 	$result = array();
 	
 	if($chat_sessions_count > 0){
@@ -78,7 +78,7 @@ if($user = get_loggedin_user()){
 		$result["friends"]["offline"] = array();
 		$result["friends"]["online"] = array();
 		
-		$inactive = (int) get_plugin_setting("onlinestatus_inactive", "elggchat");
+		$inactive = (int) elgg_get_plugin_setting("onlinestatus_inactive", "elggchat");
 		$time = time();
 		foreach($friends as $friend){
 			if($time - $friend->last_action <= $inactive){

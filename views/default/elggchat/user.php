@@ -40,7 +40,7 @@ if(!empty($user) && $user instanceof ElggUser){
 	$result .= "<tr class='chatmember'>";
 	
 	if($icon){
-		$result .= "<td><img src='" . $user->getIcon($iconSize) . "' alt='" . $user->name . "' /></td>";
+		$result .= "<td><img src='" . $user->getIconURL($iconSize) . "' alt='" . $user->name . "' /></td>";
 	 }
 	
 	if($link){
@@ -52,10 +52,10 @@ if(!empty($user) && $user instanceof ElggUser){
 	if($onlineStatus){
 		$diff = time() - $user->last_action;
 		
-		$inactive = (int) get_plugin_setting("onlinestatus_inactive", "elggchat");
-		$active = (int) get_plugin_setting("onlinestatus_active", "elggchat");
+		$inactive = (int) elgg_get_plugin_setting("onlinestatus_inactive", "elggchat");
+		$active = (int) elgg_get_plugin_setting("onlinestatus_active", "elggchat");
 		
-		$title = sprintf(elgg_echo("elggchat:session:onlinestatus"), friendly_time($user->last_action));
+		$title = sprintf(elgg_echo("elggchat:session:onlinestatus"), elgg_get_friendly_time($user->last_action));
 		
 		if($diff <= $active){
 			$result .= "<td><div class='online_status_chat' title='" . $title . "'></div></td>";
@@ -70,4 +70,3 @@ if(!empty($user) && $user instanceof ElggUser){
 	
 	echo $result;
 }
-?>

@@ -12,15 +12,18 @@
 	* @link http://www.coldtrick.com/
 	* @version 0.4
 	*/
-	require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
 	admin_gatekeeper();
 	
 	$title = elgg_view_title(elgg_echo('elggchat:title'));
-	$list = elgg_view('elggchat/list');
+	$list = elgg_view('elggchat/poll');
+	
+	$content = elgg_view_layout('one_sidebar', array(
+	'title' => $title,
+	'content' => $list,
+));
 
 	$page_data = $title . $list;
 
 	// Display main admin menu
-	page_draw(elgg_echo('elggchat'), elgg_view_layout("two_column_left_sidebar", '', $page_data));
-?>
+	echo elgg_view_page($title, $content);

@@ -37,12 +37,9 @@
 
 #elggchat_toolbar_left {
 	border-top:1px solid #CCCCCC;
-	
 	float:right;
-	
 	padding-top: 2px;
 	padding-bottom: 4px;
-	
 }
 
 #elggchat_copyright{
@@ -55,7 +52,6 @@
 .session {
 	float: left;
 	background: #E4ECF5;
-	
 	border: 1px solid #4690D6;
 	-webkit-border-radius: 5px; 
 	-moz-border-radius: 5px;
@@ -141,15 +137,14 @@
 	color: #999999;
 }
 
-.messageIcon {
-	margin-right: 7px;
-}
-
 .messageName {
-	border-bottom:1px solid #DDDDDD;
-	width: 100%;
 	font-weight: bold;
 	color: #4690D6;
+}
+
+.messageBody {
+	border-top:1px solid #DDDDDD;
+	width: 100%;
 }
 
 .chatsessiondatacontainer {
@@ -182,11 +177,9 @@
 
 .chatmember td{
 	vertical-align: middle;
+	padding: 5px;
 }
 
-.chatmembers .chatmemberinfo{
-	width: 100%;
-}
 .chatmembersfunctions {
 	text-align:right;
 	padding-right:2px;
@@ -212,17 +205,17 @@
 }
 
 .online_status_chat{
-	width:24px;
-	height:24px;
-	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/online_status.png") no-repeat 0 0;
+	width:16px;
+	height:16px;
+	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/green.png") no-repeat 0 0;
 }
 
 .online_status_idle{
-	background-position: 0 -24px;
+	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/yellow.png") no-repeat 0 0;
 }
 
 .online_status_inactive{
-	background-position: 0 -48px;
+	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/red.png") no-repeat 0 0;
 }
 
 .elggchat_session_leave{
@@ -231,7 +224,7 @@
 	cursor: pointer;
 	width:14px;
 	height:14px;
-	background: url("<?php echo $CONFIG->wwwroot; ?>_graphics/icon_customise_remove.png") no-repeat 0 0;
+	background: url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/icon_customise_remove.png") no-repeat 0 0;
 	
 }
 

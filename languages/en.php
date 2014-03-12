@@ -14,7 +14,7 @@
 	$english = array(
 		'elggchat' => "ElggChat",
 		'elggchat:title' => "ElggChat",
-		'elggchat:chat:profile:invite' => "Invite for chat",
+		'elggchat:chat:profile:invite' => "Invite to Chat",
 		'elggchat:chat:send' => "Send",
 		
 		'elggchat:friendspicker:info' => "Friends online",	
@@ -23,14 +23,14 @@
 	
 		'elggchat:chat:invite' => "Invite",
 		'elggchat:chat:leave' => "Leave",
-		'elggchat:chat:leave:confirm' => "Are you sure you wish to leave this session?",
+		'elggchat:chat:leave:confirm' => "Are you sure you wish to leave this chat?",
 		
 		'elggchat:action:invite' => "<b>%s</b> invited <b>%s</b>",
 		'elggchat:action:leave' => "<b>%s</b> left the session",
 		'elggchat:action:join' => "<b>%s</b> joined the session",
 		
 		'elggchat:session:name:default' => "Chat session (%s)",
-		'elggchat:session:onlinestatus' => "Last action: %s",
+		'elggchat:session:onlinestatus' => "Last activity: %s",
 		
 		// Plugin settings
 		'elggchat:admin:settings:hours' => "%s hour(s)",
@@ -48,15 +48,15 @@
 		'elggchat:admin:settings:online_status:inactive' => "Max number of seconds before user will be inactive",
 		
 		// User settings
-		'elggchat:usersettings:enable_chat' => "Enable ElggChat Toolbar?",
-		'elggchat:usersettings:allow_contact_from' => "Allow the following to contact me by chat",
-		'elggchat:usersettings:allow_contact_from:all' => "Everyone can contact me",
-		'elggchat:usersettings:allow_contact_from:friends' => "Only my friends can contact me",
-		'elggchat:usersettings:allow_contact_from:none' => "Nobody can contact me",
+		'elggchat:usersettings:enable_chat' => "Enable the Chat Toolbar:",
+		'elggchat:usersettings:allow_contact_from' => "Who is allowed to Chat with me:",
+		'elggchat:usersettings:allow_contact_from:all' => "Any Logged In User",
+		'elggchat:usersettings:allow_contact_from:friends' => "My Friends",
+		'elggchat:usersettings:allow_contact_from:none' => "Nobody",
 	
 		// Toolbar actions
-		'elggchat:toolbar:minimize' => "Minimize ElggChat Toolbar",
-		'elggchat:toolbar:maximize' => "Maximize ElggChat Toolbar",
+		'elggchat:toolbar:minimize' => "Minimize the Chat Toolbar",
+		'elggchat:toolbar:maximize' => "Maximize the Chat Toolbar",
 	);
 					
 	add_translation("en", $english);

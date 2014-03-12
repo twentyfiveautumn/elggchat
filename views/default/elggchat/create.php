@@ -10,23 +10,19 @@
 	* @link http://www.coldtrick.com/
 	* @version 0.4
 	*/
-
+	
 	gatekeeper();
 	
 	$inviteId = (int) get_input("invite", NULL, TRUE);
 	
-	$inviteId = 925;
-	
+	if(($invite_user = get_user($inviteId)) && $inviteId != elgg_get_logged_in_user_guid()){
 		$user = elgg_get_logged_in_user_entity();
 		
 		$session = new ElggObject();
 		$session->subtype = ELGGCHAT_SESSION_SUBTYPE;
 		$session->access_id = ACCESS_LOGGED_IN;
 		$session->save();
-		
 		$session->addRelationship($user->guid, ELGGCHAT_MEMBER);
 		$session->addRelationship($invite_user->guid, ELGGCHAT_MEMBER);
-		
-	echo json_encode(array( 'sessionId' => $session->guid)); die();
-
-	exit();
+		echo $session->guid; die();
+	}
