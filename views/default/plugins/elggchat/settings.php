@@ -1,13 +1,13 @@
 <?php
 	/**
-	* ElggChat - Pure Elgg-based chat/IM
+	* ElggChat - native elgg instant messenger
 	* 
-	* Admin settings definition
+	* Admin settings
 	* 
 	* @package elggchat
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @author twentyfiveautumn.com
+	* @copyright Coldtrick IT Solutions 2009 - twentyfiveautumn.com 2014
+	* @link http://twentyfiveautumn.com.com/
 	* @version 0.4
 	*/
 
@@ -88,12 +88,7 @@
 ));
 	?>
 	<?php echo elgg_echo('elggchat:admin:settings:enable_sounds'); ?><br />
-<!--	
-	<select name="params['enableFlashing']">
-		<option value="yes" <?php if ($enableFlashing == "yes") echo " selected=\"yes\" "; ?>><?php echo elgg_echo("option:yes");?></option>
-		<option value="no" <?php if ($enableFlashing != "yes") echo " selected=\"yes\" "; ?>><?php echo elgg_echo("option:no");?></option>
-	</select>
--->
+
 	<?php
 	echo elgg_view('input/select', array(
 	'name' => 'params[enableFlashing]',
@@ -105,12 +100,7 @@
 ));
 	?>
 	<?php echo elgg_echo('elggchat:admin:settings:enable_flashing'); ?><br />
-<!--	
-	<select name="params['enableExtensions']">
-		<option value="yes" <?php if ($enableExtensions == "yes") echo " selected=\"yes\" "; ?>><?php echo elgg_echo("option:yes");?></option>
-		<option value="no" <?php if ($enableExtensions != "yes") echo " selected=\"yes\" "; ?>><?php echo elgg_echo("option:no");?></option>
-	</select>
--->
+
 	<?php
 	echo elgg_view('input/select', array(
 	'name' => 'params[enableExtensions]',
