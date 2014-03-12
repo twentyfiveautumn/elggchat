@@ -1,13 +1,13 @@
 <?php 
 	/**
-	* ElggChat - Pure Elgg-based chat/IM
+	* ElggChat - native elgg instant messenger
 	* 
-	* Definition of the user settings
+	* User settings
 	* 
 	* @package elggchat
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @author twentyfiveautumn.com
+	* @copyright Coldtrick IT Solutions 2009 - twentyfiveautumn.com 2014
+	* @link http://twentyfiveautumn.com.com/
 	* @version 0.4
 	*/
 
@@ -37,8 +37,8 @@ $new_users_with_twitter_view = elgg_view('input/select', array(
 ));
 
 $settings = <<<__HTML
-<div>$enable_chat_label $enable_chat_view</div>
-<div>$new_users_with_twitter $new_users_with_twitter_view</div>
+	<div>$enable_chat_label $enable_chat_view</div>
+	<div>$new_users_with_twitter $new_users_with_twitter_view</div>
 __HTML;
 
 echo $settings;
