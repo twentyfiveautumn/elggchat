@@ -21,6 +21,7 @@
 	left: 0px;
 	z-index: 9999;
 	background: #DEDEDE;
+	font-size: 12px;
 } 
 
 *html #elggchat_toolbar {
