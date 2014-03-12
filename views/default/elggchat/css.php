@@ -208,14 +208,20 @@
 	width:16px;
 	height:16px;
 	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/green.png") no-repeat 0 0;
+	background-size: 10px 10px;
+	background-position:center; 
 }
 
 .online_status_idle{
 	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/yellow.png") no-repeat 0 0;
+	background-size: 10px 10px;
+	background-position:center; 
 }
 
 .online_status_inactive{
 	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/red.png") no-repeat 0 0;
+	background-size: 10px 10px;
+	background-position:center; 
 }
 
 .elggchat_session_leave{
