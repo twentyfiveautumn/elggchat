@@ -11,9 +11,6 @@
 	* @version 0.4
 	*/
 
-	require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . "/engine/start.php");
-	global $CONFIG;
-	
 	header("Content-type: text/css", true);
 ?>
 
