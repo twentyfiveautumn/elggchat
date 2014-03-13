@@ -1,13 +1,13 @@
 <?php
 	/**
-	* ElggChat - Pure Elgg-based chat/IM
+	* ElggChat - native elgg instant messenger
 	* 
 	* All the javascript/JQuery functions are in this file
 	* 
 	* @package elggchat
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @author twentyfiveautumn.com
+	* @copyright Coldtrick IT Solutions 2009 - twentyfiveautumn.com 2014
+	* @link http://twentyfiveautumn.com.com/
 	* @version 0.4
 	*/
 
@@ -35,7 +35,7 @@
 	var pollingPause = false;
 	
 	var lastTimeDataReceived = new Date().getTime();
-	
+		
 	function InitializeTimer(){
 		// Set the length of the timer, in seconds
 		secs = basesec;
@@ -450,4 +450,15 @@
 		elggchat_toolbar_resize();
 		InitializeTimer();
 		checkForSessions(true);
+		
+		//	make the new chat menu work
+	
+		$("#chat_users > li > a").click(function(event) {
+			event.preventDefault();
+			var start_session = $(this).attr("rel");
+		//	alert( "Handler for .click() called."+start_session );
+			startSession(start_session);
+		});
+		
+		// end make the new chat menu work
 	});

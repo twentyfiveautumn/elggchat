@@ -43,14 +43,15 @@
 .session {
 	width:260px;
 	float: left;
-	background: #E4ECF5;
-	border: 1px solid #4690D6;
+	background: #FAFAFA;
+	border: 1px solid #777777;
+	border-top: 0px;
 	padding:3px;
-    margin:0 5px 0px 5px;
+    margin:0 5px 0 5px;
  	max-width:260px;
-	height: 25px;
-	position:absolute;
+	height: 30px;
 	bottom: 0px;
+	font-weight: bold;
 }
 
 .elggchat_session_new_messages {
@@ -111,8 +112,9 @@
 	background:white;
 	-webkit-border-radius: 8px; 
 	-moz-border-radius: 8px;
-    padding:10px;
-    margin:0 5px 5px 5px;
+    padding: 5px;
+    margin:0 2px 2px 2px;
+	border:1px solid #CCCCCC;
 }
 
 .messageWrapper table{
@@ -136,6 +138,7 @@
 .messageBody {
 	border-top:1px solid #DDDDDD;
 	width: 100%;
+	font-weight: normal;
 }
 
 .chatsessiondatacontainer {
@@ -145,11 +148,12 @@
 
 .chatsessiondata{
 	border: 1px solid #4690D6;
+	border: 1px solid #777777;
 	border-bottom: 0px;
 	background: #E4ECF5;
 	margin: 0 -4px;
 	position:absolute;
-	bottom: 30px;
+	bottom: 23px;
 	width:266px;
 	max-height:600px;
 	overflow:hidden;
@@ -157,9 +161,9 @@
 }
 
 .chatmembers{
-	border-bottom: 1px solid #DEDEDE;
 	max-height:154px;
 	overflow-y:auto;
+	background-color: #FAFAFA;
 }
 
 .chatmember td{
@@ -172,6 +176,7 @@
 	padding-right:2px;
 	height:20px;
 	border-bottom: 1px solid #DEDEDE;
+	background-color: #FAFAFA;
 }
 .chatmembersfunctions_invite{
 	display:none;
@@ -195,7 +200,7 @@
 	width:16px;
 	height:16px;
 	background: transparent url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/green.png") no-repeat 0 0;
-	background-size: 10px 10px;
+	background-size: 10px;
 	background-position:center; 
 }
 
@@ -226,7 +231,7 @@
 
 .chatmessages{
 	min-height: 250px;
-	max-height: 400px;
+	max-height: 325px;
 	overflow-y:auto;
 }
 
@@ -246,3 +251,14 @@
 	padding: 2px;
 	width: 260px;
 }
+
+
+#chat_users > li > a > div > img {
+	padding-right: 10px;
+}
+
+.chat_status {
+	height: 10px;
+	vertical-align:center; 
+	padding-left: 10px;
+]

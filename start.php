@@ -1,13 +1,13 @@
 <?php
 	/**
-	* ElggChat - Pure Elgg-based chat/IM
+	* ElggChat - native elgg instant messenger
 	* 
 	* Main initialization file
 	* 
 	* @package elggchat
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @author twentyfiveautumn.com
+	* @copyright Coldtrick IT Solutions 2009 - twentyfiveautumn.com 2014
+	* @link http://twentyfiveautumn.com.com/
 	* @version 0.4
 	*/
 	global $CONFIG;
@@ -36,7 +36,30 @@
 				//elgg_extend_view('elggchat/extensions', 'elggchat_extensions/latest_river');
 			}
 		}
-    }
+		
+		//	start building the chat menu
+		
+		elgg_register_menu_item('topbar', array(
+				'name' => 'chat',
+				'priority' => 1100,
+				'text' => 'Chat <b class="caret"></b>',
+				'href' => '#',
+				'title' => $tooltip,
+				'data-toggle' => "dropdown",
+				'link_class' => "dropdown-toggle",
+				'item_class' => 'dropdown',
+			));
+			
+		//	pass $vars because we may want a group of users other than friends
+		$vars = array('users' => 'friend');
+		elgg_view('elggchat/chat_menu', $vars, $bypass = false, $ignored = false, $viewtype = 'default');
+			
+				
+		//	end building the chat menu
+		
+		
+		
+    }	//	end elggchat_init()
 	
 	// Cron Actions
 	function elggchat_session_cleanup($hook, $entity_type, $returnvalue, $params){
