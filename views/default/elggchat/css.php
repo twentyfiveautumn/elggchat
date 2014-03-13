@@ -1,13 +1,13 @@
 <?php
 	/**
-	* ElggChat - Pure Elgg-based chat/IM
+	* ElggChat - native elgg instant messenger
 	* 
 	* All the ElggChat CSS can be found here
 	* 
 	* @package elggchat
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @author twentyfiveautumn.com
+	* @copyright Coldtrick IT Solutions 2009 - twentyfiveautumn.com 2014
+	* @link http://twentyfiveautumn.com.com/
 	* @version 0.4
 	*/
 
@@ -40,25 +40,17 @@
 	padding-bottom: 4px;
 }
 
-#elggchat_copyright{
-	color: #CCCCCC;
-	padding-left: 5px;
-	float:left;
-	display: none;
-}
-
 .session {
 	width:260px;
 	float: left;
 	background: #E4ECF5;
 	border: 1px solid #4690D6;
-	-webkit-border-radius: 5px; 
-	-moz-border-radius: 5px;
-    padding:3px;
-    margin:0 5px 5px 5px;
-    
-    /* ie fix */
-	max-width:200px;
+	padding:3px;
+    margin:0 5px 0px 5px;
+ 	max-width:260px;
+	height: 25px;
+	position:absolute;
+	bottom: 0px;
 }
 
 .elggchat_session_new_messages {
@@ -147,7 +139,7 @@
 }
 
 .chatsessiondatacontainer {
-	// width:260px;
+	width:260px;
 	display: none;
 }
 
@@ -155,15 +147,10 @@
 	border: 1px solid #4690D6;
 	border-bottom: 0px;
 	background: #E4ECF5;
-	
-	-moz-border-radius-topright:5px; 
-	-moz-border-radius-topleft:5px; 
-	-webkit-border-top-left-radius:5px;
-	-webkit-border-top-right-radius:5px;
 	margin: 0 -4px;
 	position:absolute;
-	bottom:17px;
-	width:206px;
+	bottom: 30px;
+	width:266px;
 	max-height:600px;
 	overflow:hidden;
 	wordWrap: break-word;
@@ -231,7 +218,6 @@
 	width:14px;
 	height:14px;
 	background: url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/icon_customise_remove.png") no-repeat 0 0;
-	
 }
 
 .elggchat_session_leave:hover{
@@ -245,10 +231,11 @@
 }
 
 .elggchatinput{
-	padding-left:18px;
 	border-top: 1px solid #DEDEDE;
 	border-bottom: 1px solid #DEDEDE;
-	height:22px;
+	border: 1px solid #DEDEDE;
+	height: 25px;
+	width: 260px;
 	overflow:hidden;
 	wordWrap: break-word;
 }
@@ -257,9 +244,5 @@
 	border: none;
 	font-size:100%;
 	padding: 2px;
-}
-
-.elggchatinput input:focus{
-	border: none;
-//	background:none;
+	width: 260px;
 }
