@@ -78,6 +78,8 @@
 			secs = maxsecs;
 		}
 	}
+	
+/*****	@todo - gonna need a re-write to be able to add more than one friend to a chat session	*****/
 		
 	function inviteFriends(sessionid){
 		var currentChatWindow = $("#" + sessionid + " .chatmembersfunctions_invite"); 
@@ -95,7 +97,7 @@
 		}
 		currentChatWindow.slideToggle();
 	}
-	
+/******************************************************************************************************/	
 	function addFriend( sessionid, friend ){
 	
 		var thisURL = elgg.config.wwwroot + 'ajax/view/elggchat/invite';
@@ -130,23 +132,6 @@
 
 	}
 	
-	function toggleChatToolbar(speed){
-		$('#elggchat_toolbar_left').toggle(speed);
-		$('#toggle_elggchat_toolbar').toggleClass('minimizedToolbar');
-		
-		if($('#toggle_elggchat_toolbar').hasClass('minimizedToolbar')){
-			createCookie("elggchat_toolbar_minimized", "true");
-			pollingPause = true;
-			$('#toggle_elggchat_toolbar').attr("title", elgg.echo("elggchat:toolbar:maximize"));
-		} else {
-			pollingPause = false;
-			checkForSessions();
-			tick();
-			eraseCookie("elggchat_toolbar_minimized");
-			$('#toggle_elggchat_toolbar').attr("title", elgg.echo("elggchat:toolbar:minimize"));
-		}
-	}
-	
 	function startSession(friendGUID){
 	
 		var thisURL = elgg.config.wwwroot + 'ajax/view/elggchat/create';
@@ -159,10 +144,7 @@
 		});
 	}
 	
-	function toggleFriendsPicker(){
-		$("#elggchat_friends_picker").slideToggle();
-	}
-	
+		
 	function scroll_to_bottom(sessionid){
 		var chat_window = $("#" + sessionid +" .chatsessiondata");
 		var chatMessages = chat_window.find(".chatmessages");
@@ -350,22 +332,15 @@
 				
 			}
 			
-			// build friendspicker
+			/*****	topbar friends online notifier	*****/
 								
-						$("#elggchat_friends a").html(elgg.echo("elggchat:friendspicker:info") + "(" + data.friends.online.length + ")");
+				//		$("#elggchat_friends a").html( "old friends picker");
 			
 			if(typeof(data.friends) !== "undefined"){
 				
 										
-				$("#elggchat_friends_picker").html("");
 				
-				var tableDataOnline = "";
-			
-				$.each(data.friends.online, function(i, friend){
-					tableDataOnline += friend;
-					
-				});
-				
+	
 				/*****	lets see how many friends are online	*****/
 	
 				var numOnline = data.friends.online.length;		// the number of friends who are online
@@ -377,18 +352,10 @@
 				}
 				
 				
-				$("#elggchat_friends_picker").append( "<table>"  + tableDataOnline + "</table>");
-				
-				$("#elggchat_friends_picker a").each(function(){
-					$(this).attr("href","javascript:startSession(" + this.rel + "); toggleFriendsPicker();");
-				});
-				
 			}	/*****	end if(typeof(data.friends) !== "undefined"){	*****/
 			
-			//	end build friends picker
+			/*****	End topbar friends online notifier	*****/
 			
-			
-			// Done with all the work
 			resetTimer();
 			processing = false;
 		});
@@ -449,10 +416,7 @@
 	}	
 	
 	$(document).ready(function(){
-		if(readCookie("elggchat_toolbar_minimized")){
-			toggleChatToolbar(0);
-		}
-		
+				
 		$(window).resize(function(){
 			elggchat_toolbar_resize();
 		});
