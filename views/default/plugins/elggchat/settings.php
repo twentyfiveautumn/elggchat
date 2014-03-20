@@ -100,16 +100,5 @@
 ));
 	?>
 	<?php echo elgg_echo('elggchat:admin:settings:enable_flashing'); ?><br />
-
-	<?php
-	echo elgg_view('input/select', array(
-	'name' => 'params[enableExtensions]',
-	'options_values' => array(
-		'yes' => elgg_echo('option:yes'),
-		'no' => elgg_echo('option:no'),
-	),
-	'value' => $enableExtensions ? $enableExtensions : 'no',
-));
-	?>
-	<?php echo elgg_echo('elggchat:admin:settings:enable_extensions'); ?><br />
+	
 </p>
