@@ -62,14 +62,6 @@
 	background: #E4ECF5;
 }
 
-#elggchat_friends{
-	float:right;
-	border-left:1px solid #CCCCCC;
-	border-right:1px solid #CCCCCC;
-	padding: 0 5px 0 5px;	
-}
-
-
 .minimizedToolbar {
 	background-position: right center;
 	border-right:1px solid #CCCCCC;

@@ -32,7 +32,6 @@
 	var secs;
 	var processing = false;
 	var pollingPause = false;
-	
 	var lastTimeDataReceived = new Date().getTime();
 		
 	function InitializeTimer(){
@@ -104,7 +103,6 @@
 
 		$.post(thisURL, { chatsession : sessionid, friend : friend }, function(){
 		
-//		$.post("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/actions/invite?chatsession=" + sessionid + "&friend=" + friend, function(){		// fingers crossed
 			$("#" + sessionid + " .chatmembersfunctions_invite").toggle();
 			checkForSessions();
 			$("#" + sessionid + " input[name='chatmessage']").focus();
@@ -139,12 +137,17 @@
 		});
 	}
 	
+	/*****	scroll to the bottom of chat messages so you can see the newest messages	*****/
 		
 	function scroll_to_bottom(sessionid){
 		var chat_window = $("#" + sessionid +" .chatsessiondata");
 		var chatMessages = chat_window.find(".chatmessages");
 		$(chatMessages).scrollTop($(chatMessages)[0].scrollHeight);
 	}
+	
+	
+	
+	
 	
 	function notify_new_message(){
 		<?php if($sound == "yes"){?>
@@ -159,19 +162,16 @@
 		processing = true;
 		
 		var thisURL = elgg.config.wwwroot + 'ajax/view/elggchat/poll';
+		
 		elgg.getJSON(thisURL, function(data) {
 		
-//		alert((data.friends.offline));
-//		 $('div.elgg-image-block.clearfix').append((data.friends.offline));  
+  
 		});	//	end elgg.getJSON
 		
-//		$.getJSON(elgg.config.wwwroot + 'mod/elggchat/actions/poll', function(data){	//	the old one
 		
 		elgg.getJSON(thisURL, function(data) {
 		
-	//	$('div.elgg-image-block.clearfix').append('<p>' + data.friends.offline + '</p>');	
-	
-	
+		
 //	alert(JSON.stringify(data));
 //	alert(typeof(data.sessions));
 //	data.sessions = true;
@@ -295,10 +295,7 @@
 					
 						$.post("<?php echo $CONFIG->wwwroot;?>ajax/view/elggchat/post_message", $(this).serialize(), function(data){		// test this b4 removing
 					
-					//	var thisURL = elgg.config.wwwroot + 'ajax/view/elggchat/post_message';
-					
-					//	$.post( thisURL, $(this).serialize(), function(data){
-						
+											
 		//		alert(JSON.stringify(data));
 							checkForSessions();
 						});
@@ -329,13 +326,8 @@
 			
 			/*****	topbar friends online notifier	*****/
 								
-				//		$("#elggchat_friends a").html( "old friends picker");
-			
 			if(typeof(data.friends) !== "undefined"){
 				
-										
-				
-	
 				/*****	lets see how many friends are online	*****/
 	
 				var numOnline = data.friends.online.length;		// the number of friends who are online
@@ -345,9 +337,7 @@
 					friendsOnline = '<span class="badge">'+numOnline+'</span>';
 					$(".elgg-menu-item-chat > a").append(friendsOnline);
 				}
-				
-				
-			}	/*****	end if(typeof(data.friends) !== "undefined"){	*****/
+			}
 			
 			/*****	End topbar friends online notifier	*****/
 			
@@ -372,10 +362,9 @@
 		}	
 		scroll_to_bottom(id);
 		$("#" + id + " input[name='chatmessage']").focus();
-	//	$("#" + id + " .chatmessages div:last").focus();
 	}
 	
-	/* Cookie Functions */
+	/*****	Cookie Functions	*****/
 	function createCookie(name, value, days) {
 		if (days) {
 			var date = new Date();
@@ -411,11 +400,6 @@
 	}	
 	
 	$(document).ready(function(){
-				
-		$(window).resize(function(){
-			elggchat_toolbar_resize();
-		});
-		elggchat_toolbar_resize();
 		InitializeTimer();
 		checkForSessions(true);
 		

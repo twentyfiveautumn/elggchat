@@ -16,8 +16,5 @@
 	<div id="elggchat_toolbar_left" >
 		<div id='elggchat_sessions'> 
 		</div>
-		<div id="elggchat_friends">
-		<?php echo 'old friends picker placeholder'; ?>
-		</div>
 	</div>
 </div>
