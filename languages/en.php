@@ -54,7 +54,6 @@
 		'elggchat:usersettings:allow_contact_from:none' => "Nobody",
 	
 		// Toolbar actions
-		'elggchat:toolbar:minimize' => "Minimize the Chat Toolbar",
 		'elggchat:toolbar:maximize' => "Maximize the Chat Toolbar",
 	);
 					

@@ -69,31 +69,6 @@
 	padding: 0 5px 0 5px;	
 }
 
-#elggchat_friends_picker{
-	display: none;
-	position: absolute;
-	bottom: 25px;
-	right: 0px;
-	background: white;
-	padding: 5px;
-	padding-right: 20px;
-	overflow-x:hidden;
-	max-height:300px;
-	overflow-y: auto;
-	white-space: nowrap;
-	border-left:1px solid #CCCCCC;
-	border-top:1px solid #CCCCCC;
-	-moz-border-radius-topleft:5px; 
-	-webkit-border-top-left-radius:5px;	
-}
-
-.toggle_elggchat_toolbar {
-	border-top:1px solid #CCCCCC;	
-	width: 15px;
-	height: 100%;
-	float:left;
-	background:transparent url(<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/minimize.png) repeat-x left center;	
-}
 
 .minimizedToolbar {
 	background-position: right center;
