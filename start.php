@@ -10,14 +10,17 @@
 	* @link http://twentyfiveautumn.com.com/
 	* @version 0.4
 	*/
-	global $CONFIG;
-	
+		
 	define("ELGGCHAT_MEMBER", "elggchat_member");
 	define("ELGGCHAT_SESSION_SUBTYPE", "elggchat_session");
 	define("ELGGCHAT_SYSTEM_MESSAGE", "elggchat_system_message");
 	define("ELGGCHAT_MESSAGE", "elggchat_message");	
 	
 	function elggchat_init() {
+	
+		if(!elgg_is_logged_in()) {
+		return null;
+		}
 	
 		//sound js 
 		$chatsound_js = 'mod/elggchat/js/sound/jquery.sound.js';
