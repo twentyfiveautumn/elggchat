@@ -62,12 +62,6 @@
 	background: #E4ECF5;
 }
 
-#elggchat_extensions{
-	float:right;
-	border-left:1px solid #CCCCCC;
-	padding: 0 5px 0 5px;	
-}
-
 #elggchat_friends{
 	float:right;
 	border-left:1px solid #CCCCCC;
@@ -261,4 +255,12 @@
 	height: 10px;
 	vertical-align:center; 
 	padding-left: 10px;
-]
+}
+
+/*****	this is the topbar badge of how many chat users are online	*****/
+
+.elgg-menu-item-chat > a > span {
+	margin-left: 5px;
+	background-image: linear-gradient(to bottom, #5CB85C 0px, #419641 100%);
+	background-repeat: repeat-x;
+}
