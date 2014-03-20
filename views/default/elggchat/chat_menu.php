@@ -19,7 +19,7 @@ $options = array(
 	'relationship_guid' => $page_owner->guid,
 	'inverse_relationship' => FALSE,
 	'type' => 'user',
-	'full_view' => FALSE
+	'full_view' => FALSE,
 );
 $chat_users = elgg_get_entities_from_relationship($options);
 
