@@ -127,11 +127,6 @@
 		} 
 	}
 	
-	function elggchat_toolbar_resize(){
-		$("#elggchat_toolbar_left").css("width", $(window).width() - $("#toggle_elggchat_toolbar").width());
-
-	}
-	
 	function startSession(friendGUID){
 	
 		var thisURL = elgg.config.wwwroot + 'ajax/view/elggchat/create';
