@@ -33,13 +33,6 @@
 	background: #DEDEDE;
 }
 
-#elggchat_toolbar_left {
-	border-top:1px solid #CCCCCC;
-	float:right;
-	padding-top: 2px;
-	padding-bottom: 4px;
-}
-
 .session {
 	width:260px;
 	float: left;
@@ -60,13 +53,6 @@
 
 .elggchat_session_new_messages.elggchat_session_new_messages_blink{
 	background: #E4ECF5;
-}
-
-.minimizedToolbar {
-	background-position: right center;
-	border-right:1px solid #CCCCCC;
-	-moz-border-radius-topright:5px; 
-	-webkit-border-top-right-radius:5px;		
 }
 
 .messageWrapper {

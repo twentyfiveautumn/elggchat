@@ -13,8 +13,6 @@
 	
 ?>
 <div id="elggchat_toolbar">
-	<div id="elggchat_toolbar_left" >
-		<div id='elggchat_sessions'> 
-		</div>
+	<div id='elggchat_sessions'> 
 	</div>
 </div>
