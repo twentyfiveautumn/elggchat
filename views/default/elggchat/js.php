@@ -25,7 +25,6 @@
 	
 	header('Content-type: text/javascript');
 ?>
-
 	var basesec = <?php echo $basesec;?>;
 	var maxsecs = <?php echo $maxsecs;?>;
 	var delay = 1000;
@@ -461,4 +460,7 @@
 		});
 		
 		// end make the new chat menu work
+		
+		//	turn on topbar menu tooltips
+		$(".chat_status").tooltip();
 	});

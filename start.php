@@ -18,7 +18,7 @@
 	
 	function elggchat_init() {
 	
-		if(!elgg_is_logged_in()) {
+		if(!elgg_is_logged_in() or elgg_get_plugin_user_setting("enableChat", "elggchat") == 'no') {
 		return null;
 		}
 	
@@ -28,16 +28,9 @@
 		elgg_load_js('chatsound_js');
 		
 		if(elgg_is_logged_in()){
-			if(elgg_get_plugin_user_setting("enableChat") != "no"){
-				
-				elgg_extend_view('page/elements/header', 'elggchat/session_monitor');
-			
-				elgg_extend_view('css/elgg', 'elggchat/css');
-				elgg_extend_view('js/elgg', 'elggchat/js');
-								
-				// elggchat_extensions
-				//elgg_extend_view('elggchat/extensions', 'elggchat_extensions/latest_river');
-			}
+			elgg_extend_view('page/elements/header', 'elggchat/session_monitor');
+			elgg_extend_view('css/elgg', 'elggchat/css');
+			elgg_extend_view('js/elgg', 'elggchat/js');
 		}
 		
 		//	start building the chat menu

@@ -11,8 +11,8 @@
 	* @version 0.4
 	*/
 	
-$page_owner = elgg_get_page_owner_entity();
-$relationship = $vars['users'];
+$page_owner = elgg_get_logged_in_user_entity();
+// $relationship = $vars['users']; -- we'll use this once we start dealing with chat groups other than friends
 
 $options = array(
 	'relationship' => 'friend',
@@ -25,28 +25,27 @@ $chat_users = elgg_get_entities_from_relationship($options);
 
 foreach($chat_users as $chat_user){
 
-// @todo make sure they are not the page owner and they have chat turned on
+	// make sure they have chat turned on
+	if(elgg_get_plugin_user_setting("enableChat", $chat_user->guid,  "elggchat") == 'no'){ return null;}
 
-//	get the online status
-
-	$diff = time() - $user->last_action;
+	$diff = time() - $chat_user->last_action;
 	$inactive = (int) elgg_get_plugin_setting("onlinestatus_inactive", "elggchat");
 	$active   = (int) elgg_get_plugin_setting("onlinestatus_active", "elggchat");
 	$title = sprintf(elgg_echo("elggchat:session:onlinestatus"), elgg_get_friendly_time($chat_user->last_action));
 	
 	if($diff <= $active){
-		$onlineStatus = '<img src="'.$CONFIG->url.'mod/elggchat/_graphics/green.png" alt="'.$chat_user->username.'" class="chat_status" title="'.$title.'"/>';
+		$onlineStatus = '<img src="'.$CONFIG->url.'mod/elggchat/_graphics/green.png" alt="'.$chat_user->name.'" class="chat_status" title="'.$title.'" data-toggle="tooltip" data-placement="bottom"/>';
 	}elseif($diff <= $inactive){
-		$onlineStatus = '<img src="'.$CONFIG->url.'mod/elggchat/_graphics/yellow.png" alt="'.$chat_user->username.'" class="chat_status" title="'.$title.'"/>';
+		$onlineStatus = '<img src="'.$CONFIG->url.'mod/elggchat/_graphics/yellow.png" alt="'.$chat_user->name.'" class="chat_status" title="'.$title.'" data-toggle="tooltip" data-placement="bottom"/>';
 	}else{
-		$onlineStatus = '<img src="'.$CONFIG->url.'mod/elggchat/_graphics/red.png" alt="'.$chat_user->username.'" class="chat_status" title="'.$title.'"/>';
+		$onlineStatus = '<img src="'.$CONFIG->url.'mod/elggchat/_graphics/red.png" alt="'.$chat_user->name.'" class="chat_status" title="'.$title.'" data-toggle="tooltip" data-placement="bottom"/>';
 	}
 	
 //	end get the online status
 
 $image = $chat_user->getIconURL('tiny');
-$image = '<img src="'.$image.'" alt="'.$chat_user->username.'"/>';
-$body = $chat_user->username;
+$image = '<img src="'.$image.'" alt="'.$chat_user->name.'"/>';
+$body = $chat_user->name;
 
 $menu_item = array(
 			'name' => $chat_user->name,			
