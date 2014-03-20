@@ -351,32 +351,42 @@
 			}
 			
 			// build friendspicker
-		//	alert("I'm Here!");
-						
-			$("#elggchat_friends a").html(elgg.echo("elggchat:friendspicker:info") + "(" + data.friends.online.length + ")");
+								
+						$("#elggchat_friends a").html(elgg.echo("elggchat:friendspicker:info") + "(" + data.friends.online.length + ")");
 			
 			if(typeof(data.friends) !== "undefined"){
+				
+										
 				$("#elggchat_friends_picker").html("");
 				
 				var tableDataOnline = "";
-				var numOnline = data.friends.online.length;
+			
 				$.each(data.friends.online, function(i, friend){
 					tableDataOnline += friend;
 					
 				});
 				
-				var tableDataOffline = "";
-				var numOffline = data.friends.offline.length;
-				$.each(data.friends.offline, function(i, friend){
-					tableDataOffline += friend;
-				});
+				/*****	lets see how many friends are online	*****/
+	
+				var numOnline = data.friends.online.length;		// the number of friends who are online
 				
-				$("#elggchat_friends_picker").append("<h4 class='settings'>" + elgg.echo("elggchat:friendspicker:online") + " - " + numOnline + "</h4><table>"  + tableDataOnline + "</table><h4 class='settings'>" + elgg.echo("elggchat:friendspicker:offline") + " - " + numOffline + "</h4><table>" + tableDataOffline + "</table>");
+				if(numOnline > 0){
+				    $(".elgg-menu-item-chat > a > span").remove();
+					friendsOnline = '<span class="badge">'+numOnline+'</span>';
+					$(".elgg-menu-item-chat > a").append(friendsOnline);
+				}
+				
+				
+				$("#elggchat_friends_picker").append( "<table>"  + tableDataOnline + "</table>");
 				
 				$("#elggchat_friends_picker a").each(function(){
 					$(this).attr("href","javascript:startSession(" + this.rel + "); toggleFriendsPicker();");
 				});
-			}
+				
+			}	/*****	end if(typeof(data.friends) !== "undefined"){	*****/
+			
+			//	end build friends picker
+			
 			
 			// Done with all the work
 			resetTimer();
@@ -450,17 +460,15 @@
 		InitializeTimer();
 		checkForSessions(true);
 		
-		//	make the new chat menu work
+		/*****	make the topbar chat menu work	*****/
 	
 		$("#chat_users > li > a").click(function(event) {
 			event.preventDefault();
 			var start_session = $(this).attr("rel");
-		//	alert( "Handler for .click() called."+start_session );
 			startSession(start_session);
 		});
 		
-		// end make the new chat menu work
-		
-		//	turn on topbar menu tooltips
+		/*****	turn on topbar menu tooltips	*****/
 		$(".chat_status").tooltip();
-	});
+		
+	});			/*****	end (document).ready	*****/
