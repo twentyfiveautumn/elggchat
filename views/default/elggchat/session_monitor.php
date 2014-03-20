@@ -1,13 +1,13 @@
 <?php
 	/**
-	* ElggChat - Pure Elgg-based chat/IM
+	* ElggChat - native elgg instant messenger
 	* 
 	* Builds the ElggChat Toolbar
 	* 
 	* @package elggchat
-	* @author ColdTrick IT Solutions
-	* @copyright Coldtrick IT Solutions 2009
-	* @link http://www.coldtrick.com/
+	* @author twentyfiveautumn.com
+	* @copyright Coldtrick IT Solutions 2009 - twentyfiveautumn.com 2014
+	* @link http://twentyfiveautumn.com.com/
 	* @version 0.4
 	*/
 	
@@ -21,11 +21,7 @@
 		</div>
 		<div id="elggchat_friends_picker">
 		</div>
-		<div id='elggchat_extensions'>
-			<?php if( elgg_get_plugin_setting("enableExtensions", "elggchat") == "yes")	echo elgg_view("elggchat/extensions"); ?> 
-		</div>
 	</div>
 	<div id="toggle_elggchat_toolbar" class="toggle_elggchat_toolbar" onclick="toggleChatToolbar('slow')" title="<?php echo elgg_echo("elggchat:toolbar:minimize");?>">
 	</div>
-
 </div>
