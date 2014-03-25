@@ -45,7 +45,7 @@
 						
 				<!--			Input form	-->
 							
-							<form class="form-inline" role="form">
+							<form class="form-inline" role="chat-form">
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputEmail2">Email address</label>
 									<textarea class="form-control" rows="1" placeholder="Input form" name="chatmessage" id="chatmessage" autocomplete="off"></textarea>

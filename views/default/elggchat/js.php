@@ -436,7 +436,22 @@
 		createCookie(name, "", -1);
 	}	
 
+	// pre-submit callback 
+function showRequest(formData, jqForm, options) { 
+    var queryString = $.param(formData); 
+    alert('About to submit: \n\n' + queryString); 
+    return true; 
+} 
+ 
+// post-submit callback 
+function showResponse(responseText, statusText, xhr, $form)  { 
+    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText + 
+    '\n\nThe output div should have already been updated with the responseText.'); 
+} 
+	
+	
 $(document).ready(function () {
+
   //  InitializeTimer();
  //   checkForSessions(true);	//turn this back on after....
 
@@ -503,37 +518,27 @@ $(document).ready(function () {
 
         if (event.which == 13) {
             event.preventDefault();
-         
-         alert($(this).val());
-		 
-			var panel = $(this).parent().parent().parent();
-			var chatmessage = $(this).val();
-			var chatsession = $(panel).find("#chatsession").val();
-			var form = { chatmessage: chatmessage, chatsession:chatsession};
-		//	var form = $(panel).find(".form-inline");
 			
-		// alert("FORM: "+form);	
-			if($(this).val() != ""){
-				var thisURL = elgg.config.wwwroot + "ajax/view/elggchat/list";
+		alert($(this).val());
+		 
+		alert($(this).closest("form").attr("role"));
+		 
+		var url = elgg.config.wwwroot + "ajax/view/elggchat/post_message";
+		var options = { 
+			beforeSubmit:  showRequest,  
+			success:       showResponse,
+			url:       url,        
+			type:      'post', 
+		}; 
+		$(this).closest("form").ajaxForm(options); 
+		$(this).closest("form").submit();
 				
-				$(panel).find("#chatmessage").val("");
-				
-				$.post( thisURL, function( data ) {
-				
-				alert("back: "+data);
-					
-				});
-				
+		// empty the input field
+		$(this).val("");
 				
 				checkForSessions();
-							
-						
-			}
-					// empty the input field
-					
-					return false;
-			
-        }
+				return false;
+		}
     });
 
 }); /*****	end (document).ready	*****/	
