@@ -15,9 +15,11 @@
 	
 	$sessionId = (int) get_input("chatsession");
 	$userId = elgg_get_logged_in_user_guid();
+	$chat_message = nl2br(get_input("chatmessage"));
+	
 	
 	if(check_entity_relationship($sessionId, ELGGCHAT_MEMBER, $userId)){
-		$chat_message = nl2br(get_input("chatmessage"));
+		$chat_message = trim(nl2br(get_input("chatmessage")));
 		
 		if(!empty($chat_message)){
 			$session = get_entity($sessionId);
@@ -25,5 +27,5 @@
 			$session->save();
 		}
 	}
-	exit(); 
-?>
+	echo $sessionId;
+	die();

@@ -1,41 +1,7 @@
-<?php
-	/**
-	* ElggChat - native elgg instant messenger
-	* 
-	* All the ElggChat CSS can be found here
-	* 
-	* @package elggchat
-	* @author twentyfiveautumn.com
-	* @copyright Coldtrick IT Solutions 2009 - twentyfiveautumn.com 2014
-	* @link http://twentyfiveautumn.com.com/
-	* @version 0.4
-	*/
 
-	header("Content-type: text/css", true);
-?>
-/***
-#elggchat_toolbar {
-//	position: fixed;
-//	bottom: 0px;
-//	height: 25px;
-//	left: 0px;
-//	z-index: 9999;
-//	background: #DEDEDE;
-//	font-size: 12px;
-} 
-
-*html #elggchat_toolbar {
-//	position: fixed;
-//	bottom: 0px;
-//	height: 25px;
-//	left: 0px;
-//	z-index: 9999;
-//	background: #DEDEDE;
-}
-****/
 .session {
 	width:260px;
-	float: left;
+	float: right;
 	background: #FAFAFA;
 	border: 4px solid #777777;
 	border-top: 0px;
@@ -43,12 +9,11 @@
     margin:0 5px 0 5px;
  	max-width:260px;
 	height: 30px;
-//	bottom: 0px;
 	font-weight: bold;
-//	position: fixed;
-//	top: 763px;
-	z-index: 10;
-//	vertical-align: top;
+	position: fixed;
+	bottom: 330px;
+	left: 75%;
+//	z-index: 10000;
 }
 
 .elggchat_session_new_messages {
@@ -90,11 +55,13 @@
 	border-top:1px solid #DDDDDD;
 	width: 100%;
 	font-weight: normal;
+	float: right;
 }
 
 .chatsessiondatacontainer {
 	width:260px;
-	display: none;
+//	display: none;
+	float: right;
 }
 
 .chatsessiondata{
@@ -103,18 +70,21 @@
 	border-bottom: 0px;
 	background: #E4ECF5;
 	margin: 0 -4px;
-	position:absolute;
+	position:fixed;
 	bottom: 23px;
+	left: 75%;
 	width:266px;
 	max-height:600px;
 	overflow:hidden;
 	wordWrap: break-word;
+	float: right;
 }
 
 .chatmembers{
 	max-height:154px;
 	overflow-y:auto;
 	background-color: #FAFAFA;
+	float: right;
 }
 
 .chatmember td{
@@ -174,6 +144,8 @@
 	width:14px;
 	height:14px;
 	background: url("<?php echo $CONFIG->wwwroot; ?>mod/elggchat/_graphics/icon_customise_remove.png") no-repeat 0 0;
+	z-index: 12000;
+	border: 4px solid #777777;
 }
 
 .elggchat_session_leave:hover{
@@ -222,31 +194,50 @@
 	background-repeat: repeat-x;
 }
 
-/* Sticky sesion styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.session {
-  position: static;
-  bottom: 0;
-  width: 260px;
-  /* Set the fixed height of the footer here */
-  height: 30px;
-  background-color: #f5f5f5;
-}
 
+
+/*****	new chat window	*****/
+
+/*****	start the Panel heading	*****/
 
 #elggchat_sessions > div.panel {
+	padding-left: 0px;
+	padding-right: 0px;
+	height: 400px;
+}
 
+#elggchat_sessions .panel-heading {
+ padding-right: 5px;
+}
 
+#elggchat_sessions .panel-title {
+	text-transform:capitalize;
+}
 
-padding-left: 0px;
-padding-right: 0px;
+#elggchat_sessions .panel-title .pull-right {
+	padding: 0 5px 0 0;
+}
+
+#elggchat_sessions .panel-title .pull-right:hover {
+	cursor:pointer;
+}
+
+#elggchat_sessions .panel-title .pull-right:nth-child(1) {
 
 }
+
+/*****	end the Panel heading	*****/
+
+
+#chat-panel-template { visibility: hidden;}
+
+
+
+
+
+
+
+
+
+
+

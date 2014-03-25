@@ -34,10 +34,12 @@ if($user = elgg_get_logged_in_user_entity()){
 
 		foreach($chat_sessions as $session){
 		
-				$result["sessions"][$session->guid] = array();
+	//	$session->delete();
+		
+			$result["sessions"][$session->guid] = array();
 				
-				// List all the Members of the chat session
-				$members = $session->getEntitiesFromRelationship(ELGGCHAT_MEMBER);	//	for whatever reason this appears to work ok??
+			// List all the Members of the chat session
+			$members = $session->getEntitiesFromRelationship(ELGGCHAT_MEMBER);	//	for whatever reason this appears to work ok??
 
 					if(is_array($members) && count($members) > 1){		//	me and somebody else
 					
@@ -72,7 +74,20 @@ if($user = elgg_get_logged_in_user_entity()){
 					$result["sessions"][$session->guid]["messages"] = array();
 					
 					foreach($messages as $msg){
-						$result["sessions"][$session->guid]["messages"][$msg->id] = elgg_view("elggchat/message", array("message" => $msg, "message_owner" => get_user($msg->owner_guid), "offset" => $msg->id)); 
+					
+				//	$msgResult = elgg_view("elggchat/message", array("message" => $msg, "message_owner" => get_user($msg->owner_guid), "offset" => $msg->id)); 
+					
+				//		$result["sessions"][$session->guid]["messages"][$msg->id] = elgg_view("elggchat/message", array("message" => $msg, "message_owner" => get_user($msg->owner_guid), "offset" => $msg->id)); 
+		$message_owner = get_user($msg->owner_guid);			
+						
+$result["sessions"][$session->guid]["messages"][$msg->id]["icon"] = "<a href='" . $message_owner->getURL() . "'><img class='messageIcon' alt='" . $message_owner->name . "' src='". $message_owner->getIconURL('tiny') . "'></a>";
+
+$result["sessions"][$session->guid]["messages"][$msg->id]["messageName"] = $user->name;
+
+$result["sessions"][$session->guid]["messages"][$msg->id]["message"] = elgg_view("elggchat/message", array("message" => $msg, "message_owner" => get_user($msg->owner_guid), "offset" => $msg->id)); 
+
+
+						
 					}
 					
 				}	//	end if($msg_count > 0

@@ -21,7 +21,7 @@
 		
 		header("Cache-Control: no-cache, no-store, must-revalidate");
 		
-		echo $contents;
+		echo trim($contents);
 		
 	}
 	exit();

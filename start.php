@@ -28,9 +28,19 @@
 		elgg_load_js('chatsound_js');
 		
 		if(elgg_is_logged_in()){
-			elgg_extend_view('page/elements/header', 'elggchat/session_monitor');
-			elgg_extend_view('css/elgg', 'elggchat/css');
+		//	elgg_extend_view('page/elements/header', 'elggchat/session_monitor');
+			elgg_extend_view('page/elements/footer', 'elggchat/session_monitor');
+		//	elgg_extend_view('css/elgg', 'elggchat/css');
 			elgg_extend_view('js/elgg', 'elggchat/js');
+		
+		//	because we need it to load after bootstrap
+		
+			$elggchat_css = 'mod/elggchat/js/elggchat.css';
+			elgg_register_css('elggchat_css', $elggchat_css );
+	
+			if($get_context != 'admin'){
+				elgg_load_css('elggchat_css');
+			}
 		}
 		
 		//	start building the chat menu
@@ -139,14 +149,6 @@
 	// Extend avatar hover menu
 	elgg_register_plugin_hook_handler('register', 'menu:user_hover', 'elggchat_user_hover_menu');
 	
-	// actions
-//	elgg_register_action("elggchat/create", false, $CONFIG->pluginspath . "elggchat/actions/create.php");
-//	elgg_register_action("elggchat/post_message", false, $CONFIG->pluginspath . "elggchat/actions/post_message.php");
-//	elgg_register_action("elggchat/poll", false, $CONFIG->pluginspath . "elggchat/actions/poll.php");
-//	elgg_register_action("elggchat/invite", false, $CONFIG->pluginspath . "elggchat/actions/invite.php");
-//	elgg_register_action("elggchat/leave", false, $CONFIG->pluginspath . "elggchat/actions/leave.php");
-//	elgg_register_action("elggchat/get_smiley", false, $CONFIG->pluginspath . "elggchat/actions/get_smiley.php");
-	
 	// Logout event handler
 	elgg_register_event_handler('logout', 'user', 'elggchat_logout_handler');
 	
@@ -157,6 +159,7 @@
 	}
 	
 	// ajax views
+	elgg_register_ajax_view('elggchat/list');
 	elgg_register_ajax_view('elggchat/create');
 	elgg_register_ajax_view('elggchat/post_message');
 	elgg_register_ajax_view('elggchat/poll');

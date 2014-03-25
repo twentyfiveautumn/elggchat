@@ -25,8 +25,9 @@
 		":-D" => "<img src='" . $smiley_url . "animated_smileys/nose_grin.gif'>",
 		";-)" => "<img src='" . $smiley_url . "animated_smileys/wink_nose.gif'>",
 		";^)" => "<img src='" . $smiley_url . "animated_smileys/wink_big_nose.gif'>",
-		
 		);
+		
+	$smileys = trim($smileys);
 	
 	if($message->access_id != ACCESS_PRIVATE || $user->guid == elgg_get_logged_in_user_guid()){
 		$result = "";
@@ -47,6 +48,59 @@
 			$result .= $message->value;
 			$result .= "</div>";
 		}
-		echo $result;
+	//	echo $result;
 	}
+	
+// $result = array();
+
+// $result = '["icon"] = '."<a href='" . $user->getURL() . "'><img class='messageIcon' alt='" . $user->name . "' src='". $user->getIconURL('tiny') . "'></a>";
+$result = '["messageName"] = '.$user->name;
+$result = trim( str_ireplace(array_keys($smileys), array_values($smileys), $message->value));
+
+
+
+// Processes \r\n's first so they aren't converted twice.
+$result = str_replace(array("\r\n", "\n", "\r"), '', $result);
+
+
+echo $result;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
