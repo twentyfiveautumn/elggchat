@@ -236,8 +236,6 @@
 						
 						if(typeof(session.messages) != "undefined"){
 							$.each(session.messages, function(msgNum, msg){
-							//	newSession.messages[msgNum] = msg.replace(/[\n\r]/g, '');	// strip carriage returns
-							//	var msg = msg.replace(/[\n\r]/g, '');	// strip carriage returns
 								newSession.messages += '<li class="list-group-item" id="'+msgNum+'">'+msg+'</li>';
 							});
 						}
@@ -287,8 +285,6 @@
 			
 						if(typeof(session.messages) != "undefined"){
 							$.each(session.messages, function(msgNum, msg){
-							//	newSession.messages[msgNum] = msg.replace(/[\n\r]/g, '');	// strip carriage returns
-								var msg = msg.replace(/[\n\r]/g, '');	// strip carriage returns
 								newSession.messages += '<li class="list-group-item" id="'+msgNum+'">'+msg+'</li>';
 							});
 						}
@@ -401,41 +397,6 @@
 		return;
 	}
 	
-	/*****	Cookie Functions	*****/
-	function createCookie(name, value, days) {
-		if (days) {
-			var date = new Date();
-			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-			var expires = "Expires=" + date.toGMTString() + "; ";
-		} else {
-			var expires = "";
-		}
-		
-		document.cookie = name + "=" + value + "; " + expires + "Path=/;";
-	}
-
-	function readCookie(name) {
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
-
-		for(var i = 0; i < ca.length; i++) {
-			var c = ca[i];
-
-			while (c.charAt(0) == ' '){
-				c = c.substring(1, c.length);
-			}
-			
-			if (c.indexOf(nameEQ) == 0){
-				return c.substring(nameEQ.length, c.length);
-			}
-		}
-		return null;
-	}
-
-	function eraseCookie(name) {
-		createCookie(name, "", -1);
-	}	
-
 	// pre-submit callback 
 function showRequest(formData, jqForm, options) { 
     var queryString = $.param(formData); 
